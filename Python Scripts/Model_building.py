@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np 
 
-df = pd.read_csv("../Dataset/eda_data.csv")
+df = pd.read_csv("./Dataset/eda_data.csv")
 
 df.columns
 
@@ -17,7 +17,7 @@ df_dum = pd.get_dummies(df_model)
 from sklearn.model_selection import train_test_split
 X = df_dum.drop('avg_salary',axis=1)
 y = df.avg_salary.values
-X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.33,random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2,random_state=42)
 
 
 # Multiple Linear Regression
@@ -81,8 +81,8 @@ tpred_lml = lm_l.predict(X_test)
 tpred_rf = gs.best_estimator_.predict(X_test)
 
 from sklearn.metrics import mean_absolute_error
-mean_absolute_error(y_test,tpred_lm)
-mean_absolute_error(y_test,tpred_lml)
-mean_absolute_error(y_test,tpred_rf)
+print(mean_absolute_error(y_test,tpred_lm))
+print(mean_absolute_error(y_test,tpred_lml))
+print(mean_absolute_error(y_test,tpred_rf))
 
 mean_absolute_error(y_test,(tpred_lm+tpred_rf)/2)
